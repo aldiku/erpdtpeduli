@@ -120,8 +120,7 @@ class _HewanDetailState extends State<HewanDetail> {
                               child: Container(
                                 width: 150.0,
                                 height: 100.0,
-                                child: Image.network(
-                                    "https://qurban.dtpeduli.org/uploads/laporan/${widget.foto1}",
+                                child: Image.network("${widget.foto1}",
                                     width: 150.0,
                                     height: 100.0,
                                     fit: BoxFit.cover),
@@ -146,8 +145,7 @@ class _HewanDetailState extends State<HewanDetail> {
                               splashColor: Colors.indigo[900],
                               onTap: () => _selectPhoto('2'),
                               child: Container(
-                                child: Image.network(
-                                    "https://qurban.dtpeduli.org/uploads/laporan/${widget.foto2}",
+                                child: Image.network("${widget.foto2}",
                                     width: 300.0,
                                     height: 200.0,
                                     fit: BoxFit.cover),
@@ -172,8 +170,7 @@ class _HewanDetailState extends State<HewanDetail> {
                               splashColor: Colors.indigo[900],
                               onTap: () => _selectPhoto('3'),
                               child: Container(
-                                child: Image.network(
-                                    "https://qurban.dtpeduli.org/uploads/laporan/${widget.foto3}",
+                                child: Image.network("${widget.foto3}",
                                     width: 300.0,
                                     height: 200.0,
                                     fit: BoxFit.cover),
@@ -198,8 +195,7 @@ class _HewanDetailState extends State<HewanDetail> {
                               splashColor: Colors.indigo[900],
                               onTap: () => _selectPhoto('4'),
                               child: Container(
-                                child: Image.network(
-                                    "https://qurban.dtpeduli.org/uploads/laporan/${widget.foto4}",
+                                child: Image.network("${widget.foto4}",
                                     width: 300.0,
                                     height: 200.0,
                                     fit: BoxFit.cover),
@@ -224,8 +220,7 @@ class _HewanDetailState extends State<HewanDetail> {
                               splashColor: Colors.indigo[900],
                               onTap: () => _selectPhoto('4'),
                               child: Container(
-                                child: Image.network(
-                                    "https://qurban.dtpeduli.org/uploads/laporan/${widget.video}",
+                                child: Image.network("${widget.video}",
                                     width: 300.0,
                                     height: 200.0,
                                     fit: BoxFit.cover),
@@ -326,6 +321,8 @@ class _HewanDetailState extends State<HewanDetail> {
     final param = ImageFileConfiguration(
         input: ImageFile(filePath: path, rawBytes: bytes), config: config);
     final output = await compressor.compress(param);
+
+    //simpan file di hp di folder android/data/com.example.erpdtpeduli/file
     await FileSaver.instance.saveFile(
         "${widget.idHewan}-foto" + num, bytes, '.jpg',
         mimeType: MimeType.JPEG);
