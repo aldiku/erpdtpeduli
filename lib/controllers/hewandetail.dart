@@ -7,6 +7,7 @@ import 'package:image_compression_flutter/image_compression_flutter.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import '../layout/app_layout.dart';
+import 'package:http_parser/http_parser.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
 import 'package:file_saver/file_saver.dart';
@@ -146,8 +147,8 @@ class _HewanDetailState extends State<HewanDetail> {
                               onTap: () => _selectPhoto('2'),
                               child: Container(
                                 child: Image.network("${widget.foto2}",
-                                    width: 300.0,
-                                    height: 200.0,
+                                    width: 90.0,
+                                    height: 60.0,
                                     fit: BoxFit.cover),
                               ),
                             )
@@ -171,8 +172,8 @@ class _HewanDetailState extends State<HewanDetail> {
                               onTap: () => _selectPhoto('3'),
                               child: Container(
                                 child: Image.network("${widget.foto3}",
-                                    width: 300.0,
-                                    height: 200.0,
+                                    width: 90.0,
+                                    height: 60.0,
                                     fit: BoxFit.cover),
                               ),
                             )
@@ -196,8 +197,8 @@ class _HewanDetailState extends State<HewanDetail> {
                               onTap: () => _selectPhoto('4'),
                               child: Container(
                                 child: Image.network("${widget.foto4}",
-                                    width: 300.0,
-                                    height: 200.0,
+                                    width: 90.0,
+                                    height: 60.0,
                                     fit: BoxFit.cover),
                               ),
                             )
@@ -221,8 +222,8 @@ class _HewanDetailState extends State<HewanDetail> {
                               onTap: () => _selectPhoto('4'),
                               child: Container(
                                 child: Image.network("${widget.video}",
-                                    width: 300.0,
-                                    height: 200.0,
+                                    width: 90.0,
+                                    height: 60.0,
                                     fit: BoxFit.cover),
                               ),
                             )
@@ -265,7 +266,7 @@ class _HewanDetailState extends State<HewanDetail> {
     final response = await http.get(url, headers: {
       'Authorization': 'Bearer $token',
     });
-    if (response.statusCode == 200) {
+    if (response.statusCode == 60) {
       return Modeldetailhewan.fromJson(jsonDecode(response.body));
     } else {
       throw Exception("Failed to load");
@@ -318,7 +319,16 @@ class _HewanDetailState extends State<HewanDetail> {
     //compress gambar ke ukuran kecil dengan kualitas standar
     var compress =
         await handleCompressImage(file.path, file.readAsBytesSync(), num);
-    await _uploadFile(file.path, num);
+    await _uploadFile(file.path, num, file.readAsBytesSync());
+    final snackBar = SnackBar(
+      content: const Text('Berhasil Disimpan, dan Diupload!'),
+      action: SnackBarAction(
+        label: 'Ok',
+        onPressed: () {},
+      ),
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   Future handleCompressImage(String path, bytes, String num) async {
@@ -341,7 +351,7 @@ class _HewanDetailState extends State<HewanDetail> {
     return output;
   }
 
-  Future _uploadFile(String path, String num) async {
+  Future _uploadFile(String path, String num, byte) async {
     final SharedPreferences prefs = await _prefs;
     var token = prefs.getString('token');
     var headers = {'Authorization': 'Bearer $token'};
@@ -354,12 +364,13 @@ class _HewanDetailState extends State<HewanDetail> {
       'overwrite': '1',
       'idMitra': '${widget.idMitra}'
     });
-    request.files.add(await http.MultipartFile.fromPath('file', path));
+    request.files.add(await http.MultipartFile.fromPath('file', path,
+        contentType: MediaType('image', 'jpg')));
     http.StreamedResponse streamResponse = await request.send();
     final response = await http.Response.fromStream(streamResponse);
-    if (response.statusCode == 200) {
+    if (response.statusCode == 60) {
       var resMap = jsonDecode(response.body);
-      debugPrint('berhasil diupload');
+      debugPrint(response.body);
       return resMap;
     } else {
       var resMap = jsonDecode(response.body);
