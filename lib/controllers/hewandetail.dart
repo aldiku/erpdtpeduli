@@ -307,13 +307,15 @@ class _HewanDetailState extends State<HewanDetail> {
     if (pickedFile == null) {
       return;
     }
+    // crop gambar ke format landscape 16:9
     var file = await ImageCropper().cropImage(
         sourcePath: pickedFile.path,
         aspectRatioPresets: [CropAspectRatioPreset.ratio16x9]);
     if (file == null) {
       return;
     }
-    // file = await compressImage(file.path, 35);
+
+    //compress gambar ke ukuran kecil dengan kualitas standar
     var compress =
         await handleCompressImage(file.path, file.readAsBytesSync(), num);
     await _uploadFile(file.path, num);
@@ -332,7 +334,7 @@ class _HewanDetailState extends State<HewanDetail> {
         input: ImageFile(filePath: path, rawBytes: bytes), config: config);
     final output = await compressor.compress(param);
 
-    //simpan file di hp di folder android/data/com.example.erpdtpeduli/file
+    //simpan file setelah compress di hp di folder android/data/com.example.erpdtpeduli/files
     await FileSaver.instance.saveFile(
         "${widget.idHewan}-foto" + num, bytes, '.jpg',
         mimeType: MimeType.JPEG);
@@ -353,14 +355,16 @@ class _HewanDetailState extends State<HewanDetail> {
       'idMitra': '${widget.idMitra}'
     });
     request.files.add(await http.MultipartFile.fromPath('file', path));
-
-    http.StreamedResponse response = await request.send();
-
+    http.StreamedResponse streamResponse = await request.send();
+    final response = await http.Response.fromStream(streamResponse);
     if (response.statusCode == 200) {
-      print(await response.stream.bytesToString());
+      var resMap = jsonDecode(response.body);
+      debugPrint('berhasil diupload');
+      return resMap;
     } else {
-      print(response.statusCode);
+      var resMap = jsonDecode(response.body);
+      debugPrint(response.body);
+      return resMap;
     }
-    return "sukses";
   }
 }
