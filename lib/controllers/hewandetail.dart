@@ -118,11 +118,11 @@ class _HewanDetailState extends State<HewanDetail> {
                               splashColor: Colors.indigo[900],
                               onTap: () => _selectPhoto('1'),
                               child: Container(
-                                width: 150.0,
-                                height: 100.0,
+                                width: 90.0,
+                                height: 60.0,
                                 child: Image.network("${widget.foto1}",
-                                    width: 150.0,
-                                    height: 100.0,
+                                    width: 90.0,
+                                    height: 60.0,
                                     fit: BoxFit.cover),
                               ),
                             )
@@ -229,10 +229,20 @@ class _HewanDetailState extends State<HewanDetail> {
                         ])
                       ],
                     ),
+                    TableRow(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text("Nama Muqorib"),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8.0),
+                          child: Text(
+                              "Foto juga akan tersimpan secara otomatis di folder android/data/com.aplikasi/files setelah di crop"),
+                        )
+                      ],
+                    ),
                   ]),
-            ),
-            Row(
-              children: [Text("Video :"), Text("${widget.video}")],
             ),
             Row(
               children: [Text("Status :"), Text("${widget.status}")],
