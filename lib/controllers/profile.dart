@@ -1,5 +1,7 @@
+import 'package:erpdtpeduli/controllers/login.dart';
 import 'package:flutter/material.dart';
 import '../layout/app_layout.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfilePage extends StatefulWidget {
   static const route = "/profile";
@@ -19,10 +21,20 @@ class _ProfilePageState extends State<ProfilePage> {
           child: AppLayout(
         content: Row(
           children: [
-            Text("hello Profile"),
+            IconButton(onPressed: () => logout(), icon: Icon(Icons.logout)),
+            Text('Logout')
           ],
         ),
       )),
+    );
+  }
+
+  Future logout() async {
+    SharedPreferences userData = await SharedPreferences.getInstance();
+    await userData.clear();
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => LoginScreen()),
     );
   }
 }
