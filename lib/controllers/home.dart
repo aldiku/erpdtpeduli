@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../layout/app_layout.dart';
 import '../controllers/hewan.dart';
+import '../controllers/hewandashboard.dart';
 import '/responsive.dart';
 
 class HomePage extends StatefulWidget {
@@ -57,7 +58,7 @@ class _HomePageState extends State<HomePage> {
                   press: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => HewanPage()),
+                      MaterialPageRoute(builder: (context) => HewanDashboard()),
                     );
                   },
                 ),

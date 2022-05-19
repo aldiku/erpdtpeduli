@@ -1,16 +1,20 @@
 # erpdtpeduli
 
-A new Flutter project.
+Rencana aplikasi ERP
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Pastikan mengambil package yang support semua platform (android,ios,web,linux,mac)
 
-A few resources to get you started if this is your first Flutter project:
+package yang dipakai sementara :
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+    flutter_login: ^3.2.0
+    http: ^0.13.4
+    shared_preferences: ^2.0.13
+    mobile_scanner: ^1.0.0
+    image_picker: ^0.8.4+11
+    material_floating_search_bar: ^0.3.7
+    image_cropper: ^1.5.1
+    path_provider: ^2.0.9
+    file_saver: ^0.1.0
+    image_compression_flutter: ^1.0.2
