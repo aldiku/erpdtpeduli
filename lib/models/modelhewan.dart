@@ -11,22 +11,22 @@ String modelhewanToJson(Modelhewan data) => json.encode(data.toJson());
 
 class Modelhewan {
   Modelhewan({
-    required this.total,
+    this.total,
     required this.rows,
-    required this.offset,
-    required this.next,
-    required this.limit,
-    required this.currentPage,
-    required this.totalPage,
+    this.offset,
+    this.next,
+    this.limit,
+    this.currentPage,
+    this.totalPage,
   });
 
-  String total;
+  String? total;
   List<Row> rows;
-  int offset;
-  bool next;
-  int limit;
-  int currentPage;
-  int totalPage;
+  int? offset;
+  bool? next;
+  int? limit;
+  int? currentPage;
+  int? totalPage;
 
   factory Modelhewan.fromJson(Map<String, dynamic> json) => Modelhewan(
         total: json["total"],
@@ -51,116 +51,92 @@ class Modelhewan {
 
 class Row {
   Row({
-    this.id,
-    this.idHewan,
-    this.kodeHewan,
-    this.avaliable,
-    this.idVendor,
     this.idMitra,
-    this.stock,
-    this.sell,
-    this.price,
-    this.free,
-    this.tglLahir,
-    this.tipe,
-    this.idCabang,
-    this.idUserInsert,
-    this.status,
-    this.yearActive,
+    this.id,
+    this.kantorTransaksi,
+    this.kantorMitra,
+    this.noHewanQurban,
     this.video,
     this.foto1,
     this.foto2,
     this.foto3,
     this.foto4,
-    this.createdAt,
-    this.updatedAt,
-    this.name,
-    this.mitraName,
-    this.namaMuqorib,
+    this.dateAdd,
+    this.status,
+    this.deskripsi,
+    this.muqorib,
+    this.tipeHewanQurban,
+    this.userAdd,
+    this.printLaporan,
+    this.isDeleted,
+    this.rating,
+    this.token,
   });
 
-  String? id;
-  String? idHewan;
-  String? kodeHewan;
-  String? avaliable;
-  String? idVendor;
   String? idMitra;
-  String? stock;
-  String? sell;
-  String? price;
-  String? free;
-  String? tglLahir;
-  String? tipe;
-  String? idCabang;
-  String? idUserInsert;
+  String? id;
+  String? kantorTransaksi;
+  String? kantorMitra;
+  String? noHewanQurban;
+  String? video;
+  String? foto1;
+  String? foto2;
+  String? foto3;
+  String? foto4;
+  DateTime? dateAdd;
   String? status;
-  String? yearActive;
-  dynamic video;
-  dynamic foto1;
-  dynamic foto2;
-  dynamic foto3;
-  dynamic foto4;
-  DateTime? createdAt;
-  DateTime? updatedAt;
-  String? name;
-  String? mitraName;
-  dynamic namaMuqorib;
+  String? deskripsi;
+  String? muqorib;
+  String? tipeHewanQurban;
+  String? userAdd;
+  String? printLaporan;
+  String? isDeleted;
+  String? rating;
+  String? token;
 
   factory Row.fromJson(Map<String, dynamic> json) => Row(
-        id: json["id"],
-        idHewan: json["id_hewan"],
-        kodeHewan: json["kode_hewan"],
-        avaliable: json["avaliable"],
-        idVendor: json["id_vendor"],
         idMitra: json["id_mitra"],
-        stock: json["stock"],
-        sell: json["sell"],
-        price: json["price"],
-        free: json["free"],
-        tglLahir: json["tgl_lahir"],
-        tipe: json["tipe"],
-        idCabang: json["id_cabang"],
-        idUserInsert: json["id_user_insert"],
-        status: json["status"],
-        yearActive: json["year_active"],
+        id: json["id"],
+        kantorTransaksi: json["kantor_transaksi"],
+        kantorMitra: json["kantor_mitra"],
+        noHewanQurban: json["no_hewan_qurban"],
         video: json["video"],
         foto1: json["foto_1"],
         foto2: json["foto_2"],
         foto3: json["foto_3"],
         foto4: json["foto_4"],
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
-        name: json["name"],
-        mitraName: json["mitra_name"],
-        namaMuqorib: json["nama_muqorib"],
+        dateAdd: DateTime.parse(json["date_add"]),
+        status: json["status"],
+        deskripsi: json["deskripsi"],
+        muqorib: json["muqorib"],
+        tipeHewanQurban: json["tipe_hewan_qurban"],
+        userAdd: json["user_add"],
+        printLaporan: json["print_laporan"],
+        isDeleted: json["is_deleted"],
+        rating: json["rating"],
+        token: json["token"],
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "id_hewan": idHewan,
-        "kode_hewan": kodeHewan,
-        "avaliable": avaliable,
-        "id_vendor": idVendor,
         "id_mitra": idMitra,
-        "stock": stock,
-        "sell": sell,
-        "price": price,
-        "free": free,
-        "tgl_lahir": tglLahir,
-        "tipe": tipe,
-        "id_cabang": idCabang,
-        "id_user_insert": idUserInsert,
-        "status": status,
-        "year_active": yearActive,
+        "id": id,
+        "kantor_transaksi": kantorTransaksi,
+        "kantor_mitra": kantorMitra,
+        "no_hewan_qurban": noHewanQurban,
         "video": video,
         "foto_1": foto1,
         "foto_2": foto2,
         "foto_3": foto3,
         "foto_4": foto4,
-        "created_at": createdAt.toString(),
-        "updated_at": updatedAt.toString(),
-        "name": name,
-        "mitra_name": mitraName,
-        "nama_muqorib": namaMuqorib,
+        "date_add": dateAdd.toString(),
+        "status": status,
+        "deskripsi": deskripsi,
+        "muqorib": muqorib,
+        "tipe_hewan_qurban": tipeHewanQurban,
+        "user_add": userAdd,
+        "print_laporan": printLaporan,
+        "is_deleted": isDeleted,
+        "rating": rating,
+        "token": token,
       };
 }

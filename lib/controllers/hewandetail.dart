@@ -16,7 +16,6 @@ import 'package:http/http.dart' as http;
 class HewanDetail extends StatefulWidget {
   String? id;
   String? idHewan;
-  String? price;
   String? idCabang;
   String? status;
   String? video;
@@ -24,7 +23,6 @@ class HewanDetail extends StatefulWidget {
   String? foto2;
   String? foto3;
   String? foto4;
-  String? mitraName;
   String? idMitra;
   String? namaMuqorib;
   DateTime? updatedAt;
@@ -32,7 +30,6 @@ class HewanDetail extends StatefulWidget {
   HewanDetail(
       {this.id,
       this.idHewan,
-      this.price,
       this.idCabang,
       this.status,
       this.video,
@@ -40,7 +37,6 @@ class HewanDetail extends StatefulWidget {
       this.foto2,
       this.foto3,
       this.foto4,
-      this.mitraName,
       this.idMitra,
       this.namaMuqorib,
       this.updatedAt});
@@ -110,38 +106,14 @@ class _HewanDetailState extends State<HewanDetail> {
                       children: <Widget>[
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text("Nama Mitra"),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8.0),
-                          child: Text("${widget.mitraName}"),
-                        )
-                      ],
-                    ),
-                    TableRow(
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text("Harga Hewan"),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8.0),
-                          child: Text("${widget.price}"),
-                        )
-                      ],
-                    ),
-                    TableRow(
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
                           child: Text("Foto Sebelum"),
                         ),
                         Row(children: [
-                          if (widget.foto1 == null)
+                          if (widget.foto1 == '')
                             IconButton(
                                 onPressed: () => _selectPhoto('1'),
                                 icon: Icon(Icons.add_a_photo)),
-                          if (widget.foto1 != null)
+                          if (widget.foto1 != '')
                             InkWell(
                               splashColor: Colors.indigo[900],
                               onTap: () => _selectPhoto('1'),
@@ -165,11 +137,11 @@ class _HewanDetailState extends State<HewanDetail> {
                           child: Text("Foto Sesudah"),
                         ),
                         Row(children: [
-                          if (widget.foto2 == null)
+                          if (widget.foto2 == '')
                             IconButton(
                                 onPressed: () => _selectPhoto('2'),
                                 icon: Icon(Icons.add_a_photo)),
-                          if (widget.foto2 != null)
+                          if (widget.foto2 != '')
                             InkWell(
                               splashColor: Colors.indigo[900],
                               onTap: () => _selectPhoto('2'),
@@ -191,11 +163,11 @@ class _HewanDetailState extends State<HewanDetail> {
                           child: Text("Foto Suasana"),
                         ),
                         Row(children: [
-                          if (widget.foto3 == null)
+                          if (widget.foto3 == '')
                             IconButton(
                                 onPressed: () => _selectPhoto('3'),
                                 icon: Icon(Icons.add_a_photo)),
-                          if (widget.foto3 != null)
+                          if (widget.foto3 != '')
                             InkWell(
                               splashColor: Colors.indigo[900],
                               onTap: () => _selectPhoto('3'),
@@ -217,11 +189,11 @@ class _HewanDetailState extends State<HewanDetail> {
                           child: Text("Foto Penyaluran"),
                         ),
                         Row(children: [
-                          if (widget.foto4 == null)
+                          if (widget.foto4 == '')
                             IconButton(
                                 onPressed: () => _selectPhoto('4'),
                                 icon: Icon(Icons.add_a_photo)),
-                          if (widget.foto4 != null)
+                          if (widget.foto4 != '')
                             InkWell(
                               splashColor: Colors.indigo[900],
                               onTap: () => _selectPhoto('4'),
@@ -236,34 +208,33 @@ class _HewanDetailState extends State<HewanDetail> {
                         ])
                       ],
                     ),
+                    TableRow(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text("Video"),
+                        ),
+                        Row(children: [
+                          if (widget.video == '')
+                            IconButton(
+                                onPressed: () => _selectPhoto('4'),
+                                icon: Icon(Icons.video_call)),
+                          if (widget.foto4 != '')
+                            InkWell(
+                              splashColor: Colors.indigo[900],
+                              onTap: () => _selectPhoto('4'),
+                              child: Container(
+                                child: Image.network(
+                                    "https://qurban.dtpeduli.org/uploads/laporan/${widget.video}",
+                                    width: 300.0,
+                                    height: 200.0,
+                                    fit: BoxFit.cover),
+                              ),
+                            )
+                        ])
+                      ],
+                    ),
                   ]),
-            ),
-            Column(
-              children: [
-                Container(
-                  child: FutureBuilder<Modeldetailhewan>(
-                      future: getData(),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState == ConnectionState.done) {
-                          var body = snapshot.data?.id;
-                          var con = """$body""";
-                          return Container(
-                            child: Text(con),
-                          );
-                        } else {
-                          return Center(child: CircularProgressIndicator());
-                        }
-                      }),
-                ),
-              ],
-            ),
-            new TextField(
-              decoration: const InputDecoration(labelText: "Last Name"),
-              autocorrect: false,
-              controller: _controllerFirstName,
-              onChanged: (nameVal) => setState(() {
-                _FirstName = nameVal;
-              }),
             ),
             Row(
               children: [Text("Video :"), Text("${widget.video}")],

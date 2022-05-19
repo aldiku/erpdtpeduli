@@ -287,23 +287,21 @@ class SearchResultsListView extends StatelessWidget {
                               builder: (BuildContext context) =>
                                   new HewanDetail(
                                       id: item.id,
-                                      idHewan: item.idHewan,
-                                      price: item.price,
-                                      idCabang: item.idCabang,
+                                      idHewan: item.noHewanQurban,
+                                      idCabang: item.kantorTransaksi,
                                       status: item.status,
                                       video: item.video,
                                       foto1: item.foto1,
                                       foto2: item.foto2,
                                       foto3: item.foto3,
                                       foto4: item.foto4,
-                                      mitraName: item.mitraName,
                                       idMitra: item.idMitra,
-                                      namaMuqorib: item.namaMuqorib,
-                                      updatedAt: item.updatedAt))),
+                                      namaMuqorib: item.muqorib,
+                                      updatedAt: item.dateAdd))),
                       child: Card(
                         child: ListTile(
                           leading: Icon(Icons.pages_outlined),
-                          title: Text(item.idHewan.toString(),
+                          title: Text(item.noHewanQurban.toString(),
                               style:
                                   TextStyle(color: Colors.green, fontSize: 15)),
                           trailing: Text(
